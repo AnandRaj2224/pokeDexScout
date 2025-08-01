@@ -11,7 +11,7 @@ function App() {
     <div className='app'>
       <NavBar />
       <Wrapper />
-      <footer />
+      <Footer />
     </div>
   </div>
 }
