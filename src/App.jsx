@@ -1,9 +1,19 @@
-import React from 'react'
+import React from 'react';
+import Background from './components/Background';
+import NavBar from './sections/NavBar'
+import Wrapper from './sections/Wrapper'
+import Footer from './sections/Footer'
+
 
 function App() {
-  return (
-    <div>App</div>
-  )
+  return <div className='main-container'>
+    <Background />
+    <div className='app'>
+      <NavBar />
+      <Wrapper />
+      <footer />
+    </div>
+  </div>
 }
 
-export default App
+export default App;
