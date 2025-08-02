@@ -1,6 +1,6 @@
 import React from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
-import pokeballIcon from "../../public/assets/pokeball-icon.png";
+import pokeballIcon from "../assets/pokeball-icon.png";
 import { Link } from 'react-router-dom';
 
 function NavBar() {

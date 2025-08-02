@@ -1,6 +1,6 @@
 import React from "react";
-import Pokeball1 from "../../public/assets/pokeball.png";
-import Pokeball2 from "../../public/assets/pokeball2.png";
+import Pokeball1 from "../assets/pokeball.png";
+import Pokeball2 from "../assets/pokeball2.png";
 
 function Background() {
   return (
