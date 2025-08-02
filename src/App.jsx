@@ -4,7 +4,11 @@ import NavBar from './sections/NavBar'
 import Wrapper from './sections/Wrapper'
 import Footer from './sections/Footer'
 import {BrowserRouter,Route,Routes,Navigate} from 'react-router-dom'
-
+import Search from './pages/Search';
+import About from './pages/About';
+import Compare from './pages/Compare';
+import MyList from './pages/MyList';
+import Pokemon from './Pages/Pokemon';
 
 function App() {
   return <div className='main-container'>
