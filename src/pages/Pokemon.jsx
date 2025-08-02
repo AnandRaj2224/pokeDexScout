@@ -6,4 +6,4 @@ function Pokemon() {
   )
 }
 
-export default Pokemon
+export default Wrapper(Pokemon);

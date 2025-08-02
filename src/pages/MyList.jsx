@@ -6,4 +6,4 @@ function MyList() {
   )
 }
 
-export default MyList
+export default Wrapper(MyList);

@@ -6,4 +6,4 @@ function Compare() {
   )
 }
 
-export default Compare
+export default Wrapper(Compare);

@@ -6,4 +6,4 @@ function Search() {
   )
 }
 
-export default Search
+export default Wrapper(Search);
