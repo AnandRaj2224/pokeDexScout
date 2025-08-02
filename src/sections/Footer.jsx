@@ -1,8 +1,15 @@
 import React from 'react'
+import { MdSettingsPower } from "react-icons/md";
 
 function Footer() {
   return (
-    <div>Footer</div>
+    <div>
+      <div className="block"></div>
+      <div className="data"></div>
+      <div className="block">
+        <MdSettingsPower />
+      </div>
+    </div>
   )
 }
 
