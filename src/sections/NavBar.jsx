@@ -1,9 +1,11 @@
-import React from 'react'
+import React ,{useEffect} from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
 import pokeballIcon from "../assets/pokeball-icon.png";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useEffect } from "react";
 
 function NavBar() {
+  const location = useLocation()
   const navigateRoutes = [
   { name: 'Search', route: '/search' },
   { name: 'Pokemon', route: '/pokemon' },
@@ -11,6 +13,18 @@ function NavBar() {
   { name: 'Compare', route: '/compare' },
   { name: 'About', route: '/about' },
 ];
+
+useEffect(() => {
+  const index = navigateRoutes.findIndex(({route}) =>location.pathname.includes(route));
+  ul(index);
+},[location.pathname,navigateRoutes]);
+
+function ul(index) {
+  const underline = document.querySelectorAll<HTMLElement>(".underline");
+  for(let i =0; i < underline.lenght; i++) {
+    underline[i].style.transform = "translated3d(" + index * 100+"%,0,0)";
+  }
+}
   return( <nav>
     <div className="block">
       <img src={pokeballIcon} alt="pokeball icon" />
