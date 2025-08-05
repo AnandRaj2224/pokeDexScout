@@ -2,7 +2,6 @@ import React ,{useEffect} from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
 import pokeballIcon from "../assets/pokeball-icon.png";
 import { Link, useLocation } from 'react-router-dom';
-import { useEffect } from "react";
 
 function NavBar() {
   const location = useLocation()
