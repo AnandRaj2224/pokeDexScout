@@ -1,4 +1,6 @@
 import React from 'react';
+import { IoGitCompareSharp } from "react-icons/io5";
+import { FaTrash,FaPlus } from "react-icons/fa";
 
 function PokemonCardGrid({ Pokemons }) {
   return (
@@ -7,7 +9,9 @@ function PokemonCardGrid({ Pokemons }) {
         {Pokemons && Pokemons.length > 0 && Pokemons.map((data) => (
           <div className="pokemon-card" key={data.id}>
             <div className="pokemon-card-list"></div>
-            <div className="pokemon-card-compare"></div>
+            <div className="pokemon-card-compare">
+              <IoGitCompareSharp/>
+            </div>
             <h3 className="pokemon-card-title">{data.name}</h3>
             <img
               src={data.image}
