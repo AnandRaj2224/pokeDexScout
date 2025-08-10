@@ -1,14 +1,21 @@
 import React from 'react';
 import { IoGitCompareSharp } from "react-icons/io5";
 import { FaTrash,FaPlus } from "react-icons/fa";
+import { useLocation} from "react-router-dom"
 
 function PokemonCardGrid({ Pokemons }) {
+  const loaction = useLocation();
   return (
     <div className="pokemon-card-grid-container">
       <div className="pokemon-card-grid">
         {Pokemons && Pokemons.length > 0 && Pokemons.map((data) => (
           <div className="pokemon-card" key={data.id}>
-            <div className="pokemon-card-list"></div>
+            <div className="pokemon-card-list">
+              {location.pathname.includes("/pokemon") || location.pathname.includes("/search") ? (
+                  <FaPlus className='plus' /> ) : (
+                  <FaTrash className = "trash" /> 
+                )}
+            </div>
             <div className="pokemon-card-compare">
               <IoGitCompareSharp/>
             </div>
