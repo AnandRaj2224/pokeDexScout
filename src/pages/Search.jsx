@@ -8,7 +8,7 @@ import { debounce } from '../utils/debounce';
 
 function Search() {
   const dispatch = useAppDispatch();
-  const { allPokemon, pokemonRecords } = useAppSelector(({ pokemon }) => pokemon);
+  const { allPokemon, randomPokemons } = useAppSelector(({ pokemon }) => pokemon);
 
   // Load initial list of Pokémon
   useEffect(() => {
@@ -17,7 +17,7 @@ function Search() {
 
   // Get random Pokémon when first loaded
   useEffect(() => {
-    if (allPokemon && pokemonRecords.length === 0) {
+    if (allPokemon && randomPokemons.length === 0) {
       const clonedPokemons = [...allPokemon];
       const randomPokemons = clonedPokemons
         .sort(() => Math.random() - Math.random())
@@ -25,7 +25,7 @@ function Search() {
 
       dispatch(getPokemonData(randomPokemons));
     }
-  }, [allPokemon, pokemonRecords, dispatch]);
+  }, [allPokemon, randomPokemons, dispatch]);
 
   const handleChange = debounce((value) => getPokemon(value),300) ;
   const getPokemon = (value) => {
@@ -55,7 +55,7 @@ function Search() {
         placeholder="search pokemon"
         onChange={(e) => handleChange(e.target.value)}
       />
-      <PokemonCardGrid Pokemons={pokemonRecords} />
+      <PokemonCardGrid Pokemons={randomPokemons} />
     </div>
   );
 }
