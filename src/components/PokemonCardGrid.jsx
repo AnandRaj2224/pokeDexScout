@@ -1,10 +1,11 @@
 import React from 'react';
 import { IoGitCompareSharp } from "react-icons/io5";
 import { FaTrash,FaPlus } from "react-icons/fa";
-import { useLocation} from "react-router-dom"
+import { useLocation,useNavigate} from "react-router-dom"
 
 function PokemonCardGrid({ Pokemons }) {
   const loaction = useLocation();
+  const navigate = useNavigate();
   return (
     <div className="pokemon-card-grid-container">
       <div className="pokemon-card-grid">
@@ -25,6 +26,7 @@ function PokemonCardGrid({ Pokemons }) {
               alt={data.name}
               className="pokemon-card-image"
               loading="lazy"
+              onClick={()=>navigate(`/pokemon/${data.id}`)}
             />
             <div className="pokemon-card-types">
               {data.types.map((type, index) => {

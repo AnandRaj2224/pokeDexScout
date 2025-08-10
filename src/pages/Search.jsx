@@ -24,9 +24,26 @@ function Search() {
     }
   }, [allPokemon, pokemonRecords, dispatch]);
 
+  const getPokemon = async(value:string) => {
+    if(PiVirtualRealityDuotone.length) {
+      const pokemons = allPokemons?.filter((pokemon) => pokemon.name.includes(value.toLowerCase()));
+      dispatch(getPokemonData(!pokemons))
+    } else {
+          if (allPokemon && pokemonRecords.length === 0) {
+      const clonedPokemons = [...allPokemon];
+      const randomPokemons = clonedPokemons
+        .sort(() => Math.random() - Math.random())
+        .slice(0, 20);
+
+      dispatch(getPokemonData(randomPokemons));
+
+    }
+  }
   return (
     <div className="search">
-      <input type="text" name="" id="" />
+      <input type="text" className="pokemon-searchbar" placeholder='search pokemon'
+      onChange = {(e) =>getPokemon(e.target.value)}
+      />
       <PokemonCardGrid Pokemons={pokemonRecords} />
     </div>
   );
