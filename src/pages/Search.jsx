@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { getInitialPokemonData } from '../app/reducers/getInitialPokemonData';
 import { getPokemonData } from '../app/reducers/getPokemonData';
 import PokemonCardGrid from '../components/PokemonCardGrid';
+import { debounce } from '../utils/debounce';
 
 function Search() {
   const dispatch = useAppDispatch();
@@ -26,6 +27,7 @@ function Search() {
     }
   }, [allPokemon, pokemonRecords, dispatch]);
 
+  const handleChange = debounce((value) => getPokemon(value),300) ;
   const getPokemon = (value) => {
     if (value.length) {
       const pokemons = allPokemon?.filter((pokemon) =>
@@ -51,7 +53,7 @@ function Search() {
         type="text"
         className="pokemon-searchbar"
         placeholder="search pokemon"
-        onChange={(e) => getPokemon(e.target.value)}
+        onChange={(e) => handleChange(e.target.value)}
       />
       <PokemonCardGrid Pokemons={pokemonRecords} />
     </div>
