@@ -3,8 +3,8 @@ import { getInitialPokemonData } from '../reducers/getInitialPokemonData';
 import { getPokemonData } from '../reducers/getPokemonData';
 
 const initialState = {
-  allPokemon: undefined,
-  pokemonRecords: [],
+  allPokemon: [],
+  randomPokemons: [], 
   compareQueue: [],
   isLoading: false,
 };
@@ -39,7 +39,7 @@ const pokemonSlice = createSlice({
     });
     builder.addCase(getPokemonData.fulfilled, (state, action) => {
       if (Array.isArray(action.payload)) {
-        state.pokemonRecords.push(...action.payload);
+        state.randomPokemons = action.payload; // fixed to store correctly
       }
       state.isLoading = false;
     });

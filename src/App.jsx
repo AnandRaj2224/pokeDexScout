@@ -13,6 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from './app/hooks';
 import { clearToasts } from './app/slices/AppSlice';
 import 'react-toastify/dist/ReactToastify.css';
+import './scss/index.scss'
 
 function App() {
   const { toasts } = useAppSelector(({ app }) => app);
