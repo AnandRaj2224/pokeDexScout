@@ -1,18 +1,15 @@
-import React from "react";
-import Pokeball1 from "../assets/pokeball.png";
-import Pokeball2 from "../assets/pokeball2.png";
+import pokeball1 from "../assets/pokeball.png";
+import pokeball2 from "../assets/pokeball2.png";
 
-function Background() {
+export default function Background() {
   return (
     <div className="background">
-      <img src={Pokeball1} alt="Pokeball" className="pokeball pokeball1" />
-      <img src={Pokeball2} alt="Pokeball" className="pokeball pokeball2" />
-      <img src={Pokeball1} alt="Pokeball" className="pokeball pokeball3" />
-      <img src={Pokeball2} alt="Pokeball" className="pokeball pokeball4" />
-      <img src={Pokeball1} alt="Pokeball" className="pokeball pokeball5" />
-      <img src={Pokeball2} alt="Pokeball" className="pokeball pokeball6" />
+      <img src={pokeball1} alt="" className="pokeball pokeball-1" />
+      <img src={pokeball2} alt="" className="pokeball pokeball-2" />
+      <img src={pokeball1} alt="" className="pokeball pokeball-3" />
+      <img src={pokeball2} alt="" className="pokeball pokeball-4" />
+      <img src={pokeball1} alt="" className="pokeball pokeball-5" />
+      <img src={pokeball2} alt="" className="pokeball pokeball-6" />
     </div>
   );
 }
-
-export default Background;
