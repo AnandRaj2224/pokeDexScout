@@ -1,12 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
-import appReducer from './slices/AppSlice';
-import pokemonReducer from './slices/PokemonSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import { AppSlice, PokemonSlice } from "./slices";
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    app: appReducer,
-    pokemon: pokemonReducer,
+    pokemon: PokemonSlice.reducer,
+    app: AppSlice.reducer,
   },
 });
-
-export default store;
