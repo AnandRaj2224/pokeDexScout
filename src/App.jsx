@@ -1,32 +1,44 @@
-import React, { useEffect } from 'react';
-import Background from './components/Background';
-import NavBar from './sections/NavBar';
-import Wrapper from './sections/Wrapper';
-import Footer from './sections/Footer';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import Search from './pages/Search';
-import About from './pages/About';
-import Compare from './pages/Compare';
-import MyList from './pages/MyList';
-import Pokemon from './pages/Pokemon';
-import { ToastContainer, toast } from 'react-toastify';
-import { useAppDispatch, useAppSelector } from './app/hooks';
-import { clearToasts } from './app/slices/AppSlice';
-import 'react-toastify/dist/ReactToastify.css';
-import './scss/index.scss'
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Navbar from "./sections/Navbar";
+import Footer from "./sections/Footer";
 
-function App() {
-  const { toasts } = useAppSelector(({ app }) => app);
-  const dispatch = useAppDispatch();
+import Background from "./components/Background";
+import "./scss/index.scss";
+import { Suspense, lazy, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "./utils/firebaseConfig";
+import { useDispatch, useSelector } from "react-redux";
+import { clearToasts, setUserStatus } from "./app/slices/AppSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Loader from "./components/Loader";
+
+const Search = lazy(() => import("./pages/Search"));
+const MyList = lazy(() => import("./pages/MyList"));
+const About = lazy(() => import("./pages/About"));
+const Compare = lazy(() => import("./pages/Compare"));
+const Pokemon = lazy(() => import("./pages/Pokemon"));
+
+export default function App() {
+  const { toasts } = useSelector(({ app }) => app);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    onAuthStateChanged(firebaseAuth, (currentUser) => {
+      if (currentUser) {
+        dispatch(setUserStatus({ email: currentUser.email }));
+      }
+    });
+  }, [dispatch]);
 
   useEffect(() => {
     if (toasts.length) {
       const toastOptions = {
-        position: 'bottom-right',
+        position: "bottom-right",
         autoClose: 2000,
         pauseOnHover: true,
         draggable: true,
-        theme: 'dark',
+        theme: "dark",
       };
       toasts.forEach((message) => {
         toast(message, toastOptions);
@@ -39,22 +51,22 @@ function App() {
     <div className="main-container">
       <Background />
       <BrowserRouter>
-        <div className="app">
-          <NavBar />
-          <Routes>
-            <Route element={<Search />} path="/search" />
-            <Route element={<MyList />} path="/list" />
-            <Route element={<About />} path="/about" />
-            <Route element={<Compare />} path="/compare" />
-            <Route element={<Pokemon />} path="/pokemon/:id" />
-            <Route element={<Navigate to="/pokemon/1" />} path="*" />
-          </Routes>
-          <Footer />
-          <ToastContainer />
-        </div>
+        <Suspense fallback={<Loader />}>
+          <div className="app">
+            <Navbar />
+            <Routes>
+              <Route element={<Search />} path="/search" />
+              <Route element={<MyList />} path="/list" />
+              <Route element={<About />} path="/about" />
+              <Route element={<Compare />} path="/compare" />
+              <Route element={<Pokemon />} path="/pokemon/:id" />
+              <Route element={<Navigate to="/pokemon/1" />} path="*" />
+            </Routes>
+            <Footer />
+            <ToastContainer />
+          </div>
+        </Suspense>
       </BrowserRouter>
     </div>
   );
 }
-
-export default App;
