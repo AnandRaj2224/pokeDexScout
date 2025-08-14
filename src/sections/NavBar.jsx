@@ -1,54 +1,78 @@
-import React ,{useEffect} from 'react'
+import React, { useEffect } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import pokeballIcon from "../assets/pokeball-icon.png";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from "react-router-dom";
+import { resetRandomPokemons } from "../app/slices/PokemonSlice";
+import { useDispatch } from "react-redux";
 
-function NavBar() {
-  const location = useLocation()
-  const navigateRoutes = [
-  { name: 'Search', route: '/search' },
-  { name: 'Pokemon', route: '/pokemon' },
-  { name: 'My list', route: '/list' },
-  { name: 'Compare', route: '/compare' },
-  { name: 'About', route: '/about' },
-];
+export default function Navbar() {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const navigationRoutes = [
+    {
+      name: "Search",
+      route: "/search",
+    },
+    {
+      name: "Compare",
+      route: "/compare",
+    },
+    {
+      name: "Pokemon",
+      route: "/pokemon",
+    },
+    {
+      name: "My List",
+      route: "/list",
+    },
+    {
+      name: "About",
+      route: "/about",
+    },
+  ];
 
-useEffect(() => {
-  const index = navigateRoutes.findIndex(({route}) =>location.pathname.includes(route));
-  ul(index);
-},[location.pathname,navigateRoutes]);
+  const location = useLocation();
+  const dispatch = useDispatch();
 
-function ul(index) {
-  const underline = document.querySelectorAll<HTMLElement>(".underline");
-  for(let i =0; i < underline.lenght; i++) {
-    underline[i].style.transform = "translated3d(" + index * 100+"%,0,0)";
+  useEffect(() => {
+    const index = navigationRoutes.findIndex(({ route }) =>
+      location.pathname.includes(route)
+    );
+    ul(index);
+  }, [location.pathname, navigationRoutes]);
+
+  function ul(index) {
+    var underlines = document.querySelectorAll(".underline");
+    for (var i = 0; i < underlines.length; i++) {
+      underlines[i].style.transform = "translate3d(" + index * 100 + "%,0,0)";
+    }
   }
-}
-  return( <nav>
-    <div className="block">
-      <img src={pokeballIcon} alt="pokeball icon" />
-    </div>
-    <div className="data">
-      <ul>
+
+  return (
+    <nav>
+      <div className="block">
+        <img src={pokeballIcon} alt="" />
+      </div>
+      <div className="data">
+        <ul>
           <div className="underline"></div>
           <div className="underline"></div>
           <div className="underline"></div>
-        {
-          navigateRoutes.map(({name,route},index) =>{
-            return <Link to={route} key={index}>
-              <li>
-                {name}
-              </li>
-            </Link>
-          }) 
-        }
-      </ul>
-    </div>
-    <div className="block">
-      <GiHamburgerMenu/>
-    </div>
-  </nav>
+          {navigationRoutes.map(({ name, route }, index) => {
+            return (
+              <Link
+                to={route}
+                key={index}
+                onClick={(e) => dispatch(resetRandomPokemons())}
+              >
+                <li>{name}</li>
+              </Link>
+            );
+          })}
+        </ul>
+      </div>
+      <div className="block">
+        <GiHamburgerMenu />
+      </div>
+    </nav>
   );
 }
-
-export default NavBar
