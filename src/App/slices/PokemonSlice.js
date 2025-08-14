@@ -1,16 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { getInitialPokemonData } from '../reducers/getInitialPokemonData';
-import { getPokemonData } from '../reducers/getPokemonData';
+import { createSlice } from "@reduxjs/toolkit";
+import { getInitialPokemonData } from "../reducers/getInitialPokemonData";
+import { getPokemonsData } from "../reducers/getPokemonsData";
+import { getUserPokemons } from "../reducers/getUserPokemons";
+import { removePokemonFromUserList } from "../reducers/removePokemonFromUserList";
 
 const initialState = {
-  allPokemon: [],
-  randomPokemons: [], 
+  allPokemon: undefined,
+  randomPokemons: undefined,
   compareQueue: [],
-  isLoading: false,
+  userPokemons: [],
+  currentPokemon: undefined,
 };
 
-const pokemonSlice = createSlice({
-  name: 'pokemon',
+export const PokemonSlice = createSlice({
+  name: "pokemon",
   initialState,
   reducers: {
     addToCompare: (state, action) => {
@@ -25,29 +28,44 @@ const pokemonSlice = createSlice({
       }
     },
     removeFromCompare: (state, action) => {
-      state.compareQueue = state.compareQueue.filter(
-        (pokemon) => pokemon.id !== action.payload.id
+      const index = state.compareQueue.findIndex(
+        (pokemon) => pokemon.id === action.payload.id
       );
+      const queue = [...state.compareQueue];
+      queue.splice(index, 1);
+      state.compareQueue = queue;
+    },
+    setCurrentPokemon: (state, action) => {
+      state.currentPokemon = action.payload;
+    },
+    resetRandomPokemons: (state) => {
+      state.randomPokemons = undefined;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getInitialPokemonData.fulfilled, (state, action) => {
       state.allPokemon = action.payload;
     });
-    builder.addCase(getPokemonData.pending, (state) => {
-      state.isLoading = true;
+    builder.addCase(getPokemonsData.fulfilled, (state, action) => {
+      state.randomPokemons = action.payload;
     });
-    builder.addCase(getPokemonData.fulfilled, (state, action) => {
-      if (Array.isArray(action.payload)) {
-        state.randomPokemons = action.payload; // fixed to store correctly
-      }
-      state.isLoading = false;
+    builder.addCase(getUserPokemons.fulfilled, (state, action) => {
+      state.userPokemons = action.payload;
     });
-    builder.addCase(getPokemonData.rejected, (state) => {
-      state.isLoading = false;
+    builder.addCase(removePokemonFromUserList.fulfilled, (state, action) => {
+      const userPokemons = [...state.userPokemons];
+      const index = userPokemons.findIndex(
+        (pokemon) => pokemon.firebaseId === action.payload?.id
+      );
+      userPokemons.splice(index, 1);
+      state.userPokemons = userPokemons;
     });
   },
 });
 
-export const { addToCompare, removeFromCompare } = pokemonSlice.actions;
-export default pokemonSlice.reducer;
+export const {
+  addToCompare,
+  removeFromCompare,
+  setCurrentPokemon,
+  resetRandomPokemons,
+} = PokemonSlice.actions;
