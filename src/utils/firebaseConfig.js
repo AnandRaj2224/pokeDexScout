@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore, collection } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDNkwUXJFMOOYjNpnTkrCo1Y9nCeTpFC04",
-  authDomain: "pokedex-fe543.firebaseapp.com",
-  projectId: "pokedex-fe543",
-  storageBucket: "pokedex-fe543.appspot.com",
-  messagingSenderId: "948503681986",
-  appId: "1:948503681986:web:79250d83d60f75960a545b",
-  measurementId: "G-4Z4DWLHXGS",
+  apiKey: "AIzaSyBUpsLRDt8dugKIjSOGi6AsmqHgomes0xg",
+  authDomain: "pokedexscout.firebaseapp.com",
+  projectId: "pokedexscout",
+  storageBucket: "pokedexscout.firebasestorage.app",
+  messagingSenderId: "462131651962",
+  appId: "1:462131651962:web:be5193c728d5eccee3a2c3",
+  measurementId: "G-LBG16CCLRX"
 };
 
 const app = initializeApp(firebaseConfig);
