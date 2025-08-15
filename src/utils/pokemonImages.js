@@ -1,22 +1,25 @@
-const fetchImages = (context) => {
+const fetchImages = (modules) => {
   const images = {};
-  const cache = {};
-  function importAll(r) {
-    r.keys().forEach((key) => (cache[key] = r(key)));
-  }
-  importAll(context);
-  Object.entries(cache).forEach((module) => {
-    let key = module[0].split("");
-    key.splice(0, 2);
-    key.splice(-4, 4);
-    images[[key.join("")]] = module[1];
+
+  Object.entries(modules).forEach(([path, module]) => {
+    // Extract just the file name without extension
+    const fileName = path.split('/').pop().replace(/\.(png|jpe?g|svg)$/, '');
+    images[fileName] = module;
   });
+
   return images;
 };
 
-export const images = fetchImages(
-  require.context("../assets/pokemons/shiny", false, /\.(png|jpe?g|svg)$/)
-);
-export const defaultImages = fetchImages(
-  require.context("../assets/pokemons/default", false, /\.(png|jpe?g|svg)$/)
-);
+// Glob imports all matching files eagerly
+const shinyModules = import.meta.glob('../assets/pokemons/shiny/*.{png,jpg,jpeg,svg}', {
+  eager: true,
+  import: 'default'
+});
+
+const defaultModules = import.meta.glob('../assets/pokemons/default/*.{png,jpg,jpeg,svg}', {
+  eager: true,
+  import: 'default'
+});
+
+export const images = fetchImages(shinyModules);
+export const defaultImages = fetchImages(defaultModules);
