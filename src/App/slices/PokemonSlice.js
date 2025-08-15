@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getInitialPokemonData } from "../reducers/getInitialPokemonData";
-import { getPokemonsData } from "../reducers/getPokemonsData";
-import { getUserPokemons } from "../reducers/getUserPokemons";
-import { removePokemonFromUserList } from "../reducers/removePokemonFromUserList";
-
+import {
+  getInitialPokemonData,
+  getPokemonsData,
+  getUserPokemons,
+  removePokemonFromUserList,
+} from "../reducers";
 const initialState = {
   allPokemon: undefined,
   randomPokemons: undefined,
