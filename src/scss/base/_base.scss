@@ -1,0 +1,22 @@
+@use "sass:color";
+@use '../utils/index' as *;
+
+// Use @import for CSS url() imports, not @use.
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Raleway", sans-serif;
+  background-color: black;
+}
+
+// It's best practice to define global CSS variables inside :root.
+:root {
+  --accent-color: #f51313;
+  --accent-color-dark: #{color.scale(#f51313, $lightness: -30%)};
+}
