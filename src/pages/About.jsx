@@ -6,7 +6,6 @@ import {  FaGithub, FaLinkedin } from "react-icons/fa";
 function About() {
   return (
     <div className="profile">
-      <img src={avatarImage} alt="" className="profile-image" />
       <h1 className="profile-text">Hi I am Anand Raj</h1>
       <div className="profile-links">
         <a href="https://github.com/AnandRaj2224">
