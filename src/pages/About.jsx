@@ -10,7 +10,7 @@ function About() {
         <a href="https://github.com/AnandRaj2224">
           <FaGithub />
         </a>
-        <a href="https://www.linkedin.com/in/AnandRaj/">
+        <a href="https://www.linkedin.com/in/anand-raj-35b5b836b/">
           <FaLinkedin />
         </a>
       </div>
