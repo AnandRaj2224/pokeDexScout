@@ -3,15 +3,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore, collection } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBUpsLRDt8dugKIjSOGi6AsmqHgomes0xg",
-  authDomain: "pokedexscout.firebaseapp.com",
-  projectId: "pokedexscout",
-  storageBucket: "pokedexscout.firebasestorage.app",
-  messagingSenderId: "462131651962",
-  appId: "1:462131651962:web:be5193c728d5eccee3a2c3",
-  measurementId: "G-LBG16CCLRX"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
-
 const app = initializeApp(firebaseConfig);
 export const firebaseAuth = getAuth(app);
 export const firebaseDB = getFirestore(app);
